@@ -35,17 +35,8 @@ fi
 if ! /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" -e "CREATE table $OPENSHIFT_APP_NAME;" > /dev/null 2>&1
 then
     echo
-    echo "Database schema not found, importing 'phpbb.sql' schema."
+    echo "Created Ghost MySQL Database."
     echo
-    cat "$OPENSHIFT_REPO_DIR/.openshift/action_hooks/phpbb.sql" |sed -e s/"phpbb-dbvs.rhcloud.com"/"$OPENSHIFT_APP_DNS"/g -e s/\`phpbb\`/\`$OPENSHIFT_APP_NAME\`/ > "$OPENSHIFT_REPO_DIR/.openshift/action_hooks/phpbb2.sql" 
-    /usr/bin/mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" --verbose $OPENSHIFT_APP_NAME < "$OPENSHIFT_REPO_DIR/.openshift/action_hooks/phpbb2.sql"
-    echo
-    echo "done."
-    echo "=================================================="
-    echo "  phpbb admin login: admin"
-    echo "  phpbb admin password: OpenShiftAdmin"
-    echo "  Don't forget to change your phpbb admin password!"
-    echo "=================================================="
 else
     echo "Database found, skipping import."
 fi
