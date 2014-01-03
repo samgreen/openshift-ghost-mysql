@@ -15,7 +15,7 @@ Create an account at http://openshift.redhat.com/ and install the client tools (
 
 Create a nodejs-0.10 application (you can call your application whatever you want)
 
-    rhc app create ghost nodejs-0.10 mysql-5 --from-code=https://github.com/samgreen/openshift-ghost
+    rhc app create ghost nodejs-0.10 mysql-5 --from-code=https://github.com/samgreen/openshift-ghost-mysql
 
 That's it, you can now checkout your application at:
 
